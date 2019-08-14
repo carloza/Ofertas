@@ -1,0 +1,20 @@
+<resources>
+    <!--String del main-->
+    <string name="app_name">Ofertas</string>
+    <string name="action_settings">Buscar Oferta</string>
+    <string name="stringAbout">Desarrollado por\nCarlos Loza\nVersión 1.0</string>
+
+    <!--  ...  -->
+    <string name="Titulo">TextView</string>
+    <string name="Contenido">TextView</string>
+    <string name="about">Acerca de...</string>
+
+    <!-- actividad de la carga de ofertas-->
+    <string name="utlimagen">Aca iria la direccion de la imagen</string>
+    <string name="tituloofertacarga">Titulo de la oferta</string>
+    <string name="descripcion_de_la_oferta">Descripcion de la oferta</string>
+    <string name="infoCargaNueva">Cargar nueva oferta</string>
+    <string name="crear">Crear</string>
+    <string name="title_activity_mostrar_producto">MostrarProductoActivity</string>
+    <!---->
+</resources>
