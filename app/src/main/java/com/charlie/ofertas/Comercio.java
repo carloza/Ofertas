@@ -1,18 +1,25 @@
 package com.charlie.ofertas;
 
 public class Comercio {
+
+    protected String ID;
     protected String nombre;
     protected String info;
 
     //protected GpsSatellite posicionGPS;//     <<==
-    protected String direccion;  //estos dos (localidad y direccion) vere
-    protected String localidad;  //si puedo usar algun servio de google.maps
+    protected String direccion;  //estos dos (localidad y direccion) estaria bueno
+    protected String localidad;  //si se puediera usar algun servio de google.maps
 
-    public Comercio(String nombre, String direccion, String localidad, String info) {
+    public Comercio(String ID, String nombre, String direccion, String localidad, String info) {
+        this.ID = ID;
         this.nombre = nombre;
         this.direccion = direccion;
         this.localidad = localidad;
         this.info = info;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public String getNombre() {

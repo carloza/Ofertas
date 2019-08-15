@@ -30,7 +30,7 @@ public class Adaptador extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Producto getItem(int position) {
         return lista.get(position);
     }
 
@@ -63,13 +63,14 @@ public class Adaptador extends BaseAdapter {
         String nombreComercio = (oferta==null? "no hay oferta" : oferta.getComercio().getNombre());
         lComercio.setText(nombreComercio);
 
-        //aca voy a setear el oyente a cada item para que pase a la actividad donde se ve en detalle
+        //aca pondria el oyente pero no, el oyente se setean donde se llama
         /*
-        l.setOnClickListener(new View.OnClickListener() {
+        ListView lv = getListView();
+        setContentView(lv);
+        lv.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Snackbar.make(v, "EN DESARROLLO", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                Toast.makeText(SuggestionActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });
         */

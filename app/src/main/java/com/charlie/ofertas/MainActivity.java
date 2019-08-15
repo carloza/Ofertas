@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     protected long backPressedTime;
     protected Toast backToast;
     protected ListView listaVista;
-    //aca va el adaptador para inflar el list view
     protected Adaptador adaptador;
     protected final String TAG = "firestore";
     protected final static boolean DEBUG = false;
@@ -38,10 +38,43 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //creacion de la actividad
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //mensaje de bienvenida
+        bienvenida();
+
+        //menu de tres puntos
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // boton flotante
+        botonFltante();
+
+        //list view de productos ( podria tirarlo dentro de un metodo tambien :P )
+        if(DEBUG)Toast.makeText(MainActivity.this,"paso1", Toast.LENGTH_SHORT).show();
+        listaVista = findViewById(R.id.listaItem);
+        adaptador = new Adaptador(this, GetLista());
+        listaVista.setAdapter(adaptador);
+        if(DEBUG)Toast.makeText(MainActivity.this,"paso2", Toast.LENGTH_SHORT).show();
+        listaVista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //acá tengo que saltar a la actividad donde muestro el producto
+                Producto a = adaptador.getItem(position);
+                Toast.makeText(MainActivity.this, ""+ a.getNombre(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    /**
+     * Metodo que crea lo visual a en la bienvenida
+     */
+    private void bienvenida() {
+        //creo mensaje de de alerta al inicio y un toast de bienvenida
         AlertDialog.Builder Bienvenida = new AlertDialog.Builder(this);
         Bienvenida.setTitle("Importante");
         Bienvenida.setMessage("Esta app actualmente se encuentra en desarrollo");
@@ -52,56 +85,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Bienvenida.show();
-
-        //menu de tres puntos
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // boton flotante
-        botonFltante();
-
-        if(DEBUG)Toast.makeText(MainActivity.this,"paso1", Toast.LENGTH_SHORT).show();
-        listaVista = findViewById(R.id.listaItem);
-        adaptador = new Adaptador(this, GetLista());
-        listaVista.setAdapter(adaptador);
-        if(DEBUG)Toast.makeText(MainActivity.this,"paso2", Toast.LENGTH_SHORT).show();
-
-        /*  acá quise ponerle un oyente al listView y no le gusto, ni arrancó la app
-            lo que voy a hacer es ponerle un oyente a cada componenete del listView
-            ya veré como lo hago
-        listaVista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v, "EN DESARROLLO", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
-        // Access a Cloud Firestore instance from your Activity
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        // Create a new user with a first and last name
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
-
-        // Add a new document with a generated ID
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
-         */
     }
 
     /**
@@ -149,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
      */
     protected ArrayList<Producto> GetLista(){
         //ArrayList<Oferta> lsi = new ArrayList<>();
-        DatosPruebas d = new DatosPruebas();
+        Datos d = new Datos();
         /*
         for(int i = 0; i<15; i++){
             lsi.add(new Ofertas(i, "Oferta"+i, "Aca va el contenido: contenido "+i));
@@ -180,8 +163,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * metodo auxiliar para crear el el boton flotante
-     * aca tambien le asigo el oyente al click
+     * Metodo auxiliar para crear el el boton flotante
+     * aca tambien le asigno el oyente
      */
 
     protected void botonFltante(){
@@ -239,5 +222,41 @@ public class MainActivity extends AppCompatActivity {
     startActivityForResult(i,request_Code);
     //startActivity(i);
 
-     */
+            acá quise ponerle un oyente al listView y no le gusto, ni arrancó la app
+            lo que voy a hacer es ponerle un oyente a cada componenete del listView
+            ya veré como lo hago
+            listaVista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "EN DESARROLLO", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+
+        // Access a Cloud Firestore instance from your Activity
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Create a new user with a first and last name
+        Map<String, Object> user = new HashMap<>();
+        user.put("first", "Ada");
+        user.put("last", "Lovelace");
+        user.put("born", 1815);
+
+        // Add a new document with a generated ID
+        db.collection("users")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+         */
 }

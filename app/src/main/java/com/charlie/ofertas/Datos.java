@@ -2,13 +2,13 @@ package com.charlie.ofertas;
 
 import java.util.ArrayList;
 
-public class DatosPruebas {
+public class Datos {
 
     protected ArrayList<Comercio> listaComercios;
     protected ArrayList<Producto> listaProductos;
     protected ArrayList<Oferta> listaOfertas;
 
-    public DatosPruebas() {
+    public Datos() {
 
         listaOfertas = new ArrayList<Oferta>();
         listaProductos = new ArrayList<Producto>();
