@@ -8,17 +8,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Adaptador extends BaseAdapter {
+public class AdaptadorProductos extends BaseAdapter {
 
     protected Context context;
     protected ArrayList<Producto> lista;
     protected LayoutInflater inflater = null;
 
-    public Adaptador( Context context, ArrayList<Producto> lista) {
+    public AdaptadorProductos(Context context, ArrayList<Producto> lista) {
         this.lista = lista;
         this.context = context;
 
@@ -46,15 +45,15 @@ public class Adaptador extends BaseAdapter {
         //Toast.makeText(context,"paso1", Toast.LENGTH_SHORT).show();
         Producto item = (Producto) this.getItem(position);
 
-        if(convertView==null) convertView = LayoutInflater.from(context).inflate(R.layout.itemoferta, null);
+        if(convertView==null) convertView = LayoutInflater.from(context).inflate(R.layout.item_producto, null);
 
         //recupero punteros
-        LinearLayout l = convertView.findViewById(R.id.itemoferta);
+        LinearLayout l = convertView.findViewById(R.id.itemproducto);
 
-        //convertView = LayoutInflater.from(context).inflate(R.layout.itemoferta, parent);
+        //convertView = LayoutInflater.from(context).inflate(R.layout.item_producto, parent);
         ImageView iRubro = convertView.findViewById(R.id.imageViewRubro);
-        TextView tProducto = convertView.findViewById(R.id.textViewNombreProducto);
-        TextView lComercio = convertView.findViewById(R.id.textViewComercioDeOferta);
+        TextView tProducto = convertView.findViewById(R.id.textViewTitulo);
+        TextView lComercio = convertView.findViewById(R.id.textViewSubtitulo);
 
         //seteo atributos
         iRubro.setImageResource(R.mipmap.ic_launcher_round);
@@ -62,18 +61,6 @@ public class Adaptador extends BaseAdapter {
         Oferta oferta = item.primerOferta();
         String nombreComercio = (oferta==null? "no hay oferta" : oferta.getComercio().getNombre());
         lComercio.setText(nombreComercio);
-
-        //aca pondria el oyente pero no, el oyente se setean donde se llama
-        /*
-        ListView lv = getListView();
-        setContentView(lv);
-        lv.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                Toast.makeText(SuggestionActivity.this, "" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-        */
 
         return convertView;
     }

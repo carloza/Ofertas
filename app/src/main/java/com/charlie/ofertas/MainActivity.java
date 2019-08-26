@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected long backPressedTime;
     protected Toast backToast;
     protected ListView listaVista;
-    protected Adaptador adaptador;
+    protected AdaptadorProductos adaptadorProductos;
     protected final String TAG = "firestore";
     protected final static boolean DEBUG = false;
     protected int request_Code;
@@ -56,15 +56,18 @@ public class MainActivity extends AppCompatActivity {
         //list view de productos ( podria tirarlo dentro de un metodo tambien :P )
         if(DEBUG)Toast.makeText(MainActivity.this,"paso1", Toast.LENGTH_SHORT).show();
         listaVista = findViewById(R.id.listaItem);
-        adaptador = new Adaptador(this, GetLista());
-        listaVista.setAdapter(adaptador);
+        adaptadorProductos = new AdaptadorProductos(this, GetLista());
+        listaVista.setAdapter(adaptadorProductos);
         if(DEBUG)Toast.makeText(MainActivity.this,"paso2", Toast.LENGTH_SHORT).show();
         listaVista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //acá tengo que saltar a la actividad donde muestro el producto
-                Producto a = adaptador.getItem(position);
-                Toast.makeText(MainActivity.this, ""+ a.getNombre(), Toast.LENGTH_SHORT).show();
+                Producto a = adaptadorProductos.getItem(position);
+                //Toast.makeText(MainActivity.this, ""+ a.getNombre(), Toast.LENGTH_SHORT).show();
+                Intent nuevoIntent = new Intent(MainActivity.this, MostrarProductoActivity.class);
+                nuevoIntent.putExtra("Producto", a.getID());
+                startActivity(nuevoIntent);
             }
         });
 
@@ -116,8 +119,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.about) {
-            Toast.makeText(MainActivity.this,"Desarrollado por\nCarlos" +
-                    " Loza\nVersión 1.0", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this,"Desarrollado por\nCarlos Loza\nVersión 1.0", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, R.string.stringAbout, Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -197,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(DEBUG)Toast.makeText(getBaseContext(), "Entre al onActivityResult", Toast.LENGTH_LONG).show();
-        if (requestCode == request_Code) {
+        if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 //String returnedResult = data.getStringExtra("Extito");
                 // OR
@@ -208,6 +211,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), data.getStringExtra("Cancel"), Toast.LENGTH_LONG).show();
 
             }
+        }else if(requestCode == 2){
+
         }
     }
 
