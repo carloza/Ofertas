@@ -1,9 +1,6 @@
 package com.charlie.ofertas;
 
-import android.gesture.Prediction;
-
 import java.util.ArrayList;
-import java.util.function.Predicate;
 
 /**
  * Esta clase es para representar cada Producto

@@ -7,6 +7,7 @@ public class Datos {
     protected ArrayList<Comercio> listaComercios;
     protected ArrayList<Producto> listaProductos;
     protected ArrayList<Oferta> listaOfertas;
+    protected static Datos misDatos;
 
     public Datos() {
 
@@ -14,6 +15,13 @@ public class Datos {
         listaProductos = new ArrayList<Producto>();
         listaComercios = new ArrayList<Comercio>();
         creaDatos();
+    }
+
+    public static Datos getInstance(){
+        if(misDatos==null){
+            misDatos = new Datos();
+        }
+        return misDatos;
     }
 
     /**

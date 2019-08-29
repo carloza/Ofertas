@@ -11,16 +11,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class AdaptadorProductos extends BaseAdapter {
+public class AdaptadorOfertas extends BaseAdapter {
 
     protected Context context;
-    protected ArrayList<Producto> lista;
+    protected ArrayList<Oferta> lista;
     protected LayoutInflater inflater = null;
 
-    public AdaptadorProductos(Context context, ArrayList<Producto> lista) {
-        this.lista = lista;
+    public AdaptadorOfertas(Context context, ArrayList<Oferta> lista) {
         this.context = context;
-
+        this.lista = lista;
     }
 
     @Override
@@ -29,7 +28,7 @@ public class AdaptadorProductos extends BaseAdapter {
     }
 
     @Override
-    public Producto getItem(int position) {
+    public Oferta getItem(int position) {
         return lista.get(position);
     }
 
@@ -42,28 +41,24 @@ public class AdaptadorProductos extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //Toast.makeText(context,"paso1", Toast.LENGTH_SHORT).show();
-        Producto item = (Producto) this.getItem(position);
+        Oferta item = this.getItem(position);
 
         if(convertView==null) convertView = LayoutInflater.from(context).inflate(R.layout.item_producto, null);
 
         //recupero punteros
         LinearLayout l = convertView.findViewById(R.id.itemproducto);
 
-        //convertView = LayoutInflater.from(context).inflate(R.layout.item_producto, parent);
-        ImageView Rubro = convertView.findViewById(R.id.imageViewRubro);
-        TextView Producto = convertView.findViewById(R.id.textViewTitulo);
+        ImageView iRubro = convertView.findViewById(R.id.imageViewRubro);
+        TextView Precio = convertView.findViewById(R.id.textViewTitulo);
         TextView Comercio = convertView.findViewById(R.id.textViewSubtitulo);
-        TextView Precio = convertView.findViewById(R.id.textViewSubtitulo2);
+        TextView direccion = convertView.findViewById(R.id.textViewSubtitulo2);
 
         //seteo atributos
-        Rubro.setImageResource(R.mipmap.ic_launcher_round);
-        Producto.setText(item.getNombre());
-        Oferta oferta = item.primerOferta();
-        String nombreComercio = (oferta==null? "no hay oferta" : oferta.getComercio().getNombre());
-        Comercio.setText(nombreComercio);
-        String precio = (oferta==null? "no hay oferta" : "$ "+oferta.getPrecio());
-        Precio.setText(precio);
+        iRubro.setImageResource(R.mipmap.ic_launcher_round);
+        Precio.setText("$ "+item.getPrecio());
+        Comercio comercio = item.getComercio();
+        Comercio.setText(comercio.getNombre());
+        direccion.setText(comercio.getDireccion());
 
         return convertView;
     }

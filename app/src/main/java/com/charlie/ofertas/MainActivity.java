@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         //list view de productos ( podria tirarlo dentro de un metodo tambien :P )
         if(DEBUG)Toast.makeText(MainActivity.this,"paso1", Toast.LENGTH_SHORT).show();
-        listaVista = findViewById(R.id.listaItem);
+        listaVista = findViewById(R.id.listaProductos);
         adaptadorProductos = new AdaptadorProductos(this, GetLista());
         listaVista.setAdapter(adaptadorProductos);
         if(DEBUG)Toast.makeText(MainActivity.this,"paso2", Toast.LENGTH_SHORT).show();

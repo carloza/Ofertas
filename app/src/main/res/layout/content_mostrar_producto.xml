@@ -14,6 +14,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mostrarNombreProducto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Producto"
@@ -28,6 +29,7 @@
         android:layout_gravity="bottom">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mostrarMarcaProducto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Marca"
@@ -42,6 +44,7 @@
         android:layout_gravity="bottom">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mostrarContenidoProducto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contenido"
@@ -56,6 +59,7 @@
         android:layout_gravity="bottom">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mostrarRubroProducto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Rubro"
@@ -66,7 +70,9 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/listaOfertas"
+        />
 
 
 </LinearLayout>

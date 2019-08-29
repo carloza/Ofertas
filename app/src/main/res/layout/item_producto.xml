@@ -34,7 +34,7 @@
             android:textStyle="italic"/>
 
         <TextView
-            android:id="@+id/textViewPrecio"
+            android:id="@+id/textViewSubtitulo2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15sp"
