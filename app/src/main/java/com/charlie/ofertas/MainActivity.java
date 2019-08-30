@@ -54,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
         botonFltante();
 
         //list view de productos ( podria tirarlo dentro de un metodo tambien :P )
+        crearListaDeProductos();
+
+    }
+
+    /**
+     *
+     */
+    private void crearListaDeProductos() {
         if(DEBUG)Toast.makeText(MainActivity.this,"paso1", Toast.LENGTH_SHORT).show();
         listaVista = findViewById(R.id.listaProductos);
         adaptadorProductos = new AdaptadorProductos(this, GetLista());
@@ -70,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(nuevoIntent);
             }
         });
-
     }
 
     /**
@@ -84,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         Bienvenida.setCancelable(false);
         Bienvenida.setPositiveButton("Mandale mechaaa!!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
-                Toast.makeText(MainActivity.this,"Bienvenido", Toast.LENGTH_SHORT).show();;
+                Toast.makeText(MainActivity.this,"Bienvenido", Toast.LENGTH_SHORT).show();
             }
         });
         Bienvenida.show();
@@ -135,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
      */
     protected ArrayList<Producto> GetLista(){
         //ArrayList<Oferta> lsi = new ArrayList<>();
-        Datos d = new Datos();
+        Datos d = Datos.getInstance();
         /*
         for(int i = 0; i<15; i++){
             lsi.add(new Ofertas(i, "Oferta"+i, "Aca va el contenido: contenido "+i));
@@ -176,8 +183,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //creamos el intent
-                Intent i = new Intent(MainActivity.this , CargarNuevoActivity.class);
+                //creamos el intent                                    BuscarProductosActivity.class
+                Intent i = new Intent(MainActivity.this , BuscarProductosActivity.class);
+                //                                                     CargarNuevoActivity.class
 
                 i.putExtra("Main", "Manito");
 

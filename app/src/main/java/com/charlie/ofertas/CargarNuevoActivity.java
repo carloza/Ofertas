@@ -41,7 +41,7 @@ public class CargarNuevoActivity extends AppCompatActivity {
                 //String resultText = titulo.getText().toString();
                 //intentLocal.putExtra("result",resultText);
 
-                Intent i2 = new Intent(getBaseContext(),BuscarProductoActivity.class);
+                Intent i2 = new Intent(getBaseContext(), BuscarProductosActivity.class);
                 i2.putExtras(intentLocal.getExtras());
                 startActivityForResult(i2,8);
 

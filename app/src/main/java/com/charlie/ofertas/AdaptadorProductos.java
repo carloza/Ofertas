@@ -48,7 +48,7 @@ public class AdaptadorProductos extends BaseAdapter {
         if(convertView==null) convertView = LayoutInflater.from(context).inflate(R.layout.item_producto, null);
 
         //recupero punteros
-        LinearLayout l = convertView.findViewById(R.id.itemproducto);
+        LinearLayout l = convertView.findViewById(R.id.itemListView);
 
         //convertView = LayoutInflater.from(context).inflate(R.layout.item_producto, parent);
         ImageView Rubro = convertView.findViewById(R.id.imageViewRubro);

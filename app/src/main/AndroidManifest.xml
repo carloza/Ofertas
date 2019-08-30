@@ -9,11 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".DefinirOfertaActivity"></activity>
+        <activity android:name=".BuscarComerciosActivity" />
         <activity
             android:name=".MostrarProductoActivity"
             android:label="@string/title_activity_mostrar_producto"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".BuscarProductoActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".BuscarProductosActivity" />
         <activity android:name=".CargarNuevoActivity" />
         <activity
             android:name=".MainActivity"

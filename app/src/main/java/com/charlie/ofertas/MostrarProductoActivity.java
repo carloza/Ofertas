@@ -14,7 +14,7 @@ import android.widget.ListView;
 
 public class MostrarProductoActivity extends AppCompatActivity {
 
-    protected Producto actual;
+    protected Producto datos;
     protected TextInputEditText producto, marca, contenido, rubro;
     protected ListView listaDeOfertas;
     protected AdaptadorOfertas adapte;
@@ -36,21 +36,22 @@ public class MostrarProductoActivity extends AppCompatActivity {
         });
 
         String ID = getIntent().getStringExtra("Producto");
-        actual = Datos.getInstance().getProductoByID(ID);
+        datos = Datos.getInstance().getProductoByID(ID);
 
         producto = findViewById(R.id.mostrarNombreProducto);
         marca = findViewById(R.id.mostrarMarcaProducto);
         contenido = findViewById(R.id.mostrarContenidoProducto);
         rubro = findViewById(R.id.mostrarRubroProducto);
 
-        producto.setText(actual.getNombre());
-        marca.setText(actual.getMarca());
-        contenido.setText(actual.getCant()+actual.getUnidad());
-        rubro.setText(actual.getRubro());
+        producto.setText(datos.getNombre());
+        marca.setText(datos.getMarca());
+        contenido.setText(datos.getCant()+ datos.getUnidad());
+        rubro.setText(datos.getRubro());
 
         listaDeOfertas = findViewById(R.id.listaOfertas);
-        adapte = new AdaptadorOfertas(this, actual.getOfertasDeEste());
+        adapte = new AdaptadorOfertas(this, datos.getOfertasDeEste());
         listaDeOfertas.setAdapter(adapte);
+        //aca podria agregar un oyente a cada item que dirija al comercio
 
     }
 
