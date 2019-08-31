@@ -70,9 +70,17 @@ public class BuscarProductosActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        intentLocal.putExtra("Cancel", "Cancel: Oferta Descartada");
+        intentLocal.putExtra("Resultado", "Cancel: Oferta Descartada");
         setResult(Activity.RESULT_CANCELED,intentLocal);
         finish();
         //super.onBackPressed();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            intentLocal.putExtras(data.getExtras());
+            setResult(resultCode,intentLocal);
+            finish();
+        }
     }
 }

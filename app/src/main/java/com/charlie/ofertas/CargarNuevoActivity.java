@@ -43,7 +43,7 @@ public class CargarNuevoActivity extends AppCompatActivity {
 
                 Intent i2 = new Intent(getBaseContext(), BuscarProductosActivity.class);
                 i2.putExtras(intentLocal.getExtras());
-                startActivityForResult(i2,8);
+                startActivityForResult(i2,1);
 
             }
         });
@@ -58,17 +58,12 @@ public class CargarNuevoActivity extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == 8) {
+        if (requestCode == 1) {
             intentLocal.putExtras(data.getExtras());
 
             if (resultCode == RESULT_OK) {
 
                 setResult(Activity.RESULT_OK,intentLocal);
-
-                //String returnedResult = data.getStringExtra("result");
-                // OR
-                // String returnedResult = data.getDataString();
-                //Toast.makeText(getBaseContext(), "Guardaremos tu oferta de "+returnedResult, Toast.LENGTH_LONG).show();
             }
             else if(resultCode == RESULT_CANCELED){
                 setResult(Activity.RESULT_CANCELED,intentLocal);

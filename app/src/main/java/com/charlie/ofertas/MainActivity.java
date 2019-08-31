@@ -213,10 +213,10 @@ public class MainActivity extends AppCompatActivity {
                 //String returnedResult = data.getStringExtra("Extito");
                 // OR
                 // String returnedResult = data.getDataString();
-                Toast.makeText(getBaseContext(), data.getStringExtra("Exito"), Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), data.getStringExtra("Resultado"), Toast.LENGTH_LONG).show();
             }
             else if(resultCode == RESULT_CANCELED){
-                Toast.makeText(getBaseContext(), data.getStringExtra("Cancel"), Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), data.getStringExtra("Resultado"), Toast.LENGTH_LONG).show();
 
             }
         }else if(requestCode == 2){
