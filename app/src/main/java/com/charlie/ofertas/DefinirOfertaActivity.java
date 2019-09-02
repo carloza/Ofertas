@@ -42,18 +42,25 @@ public class DefinirOfertaActivity extends AppCompatActivity {
         concretar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int precio = Integer.parseInt(textPrecio.getText().toString());
-                String info = textInfo.getText().toString();
+                if (textPrecio.getText().toString().equals("")){
+                    textPrecio.setError("Dato requerido");
+                }else{
+                    //aca no atrapo la posible excepcion xq la vista controla que solo inresen numeros
+                    int precio = Integer.parseInt(textPrecio.getText().toString());
+                    float precio2 = Float.parseFloat(textPrecio.getText().toString());
+                    String info = textInfo.getText().toString();
 
-                System.out.println("el precio es --------------------------------");
-                System.out.println(precio);
-                System.out.println("aca termina el precio------------------------");
+                    System.out.println("el precio es --------------------------------");
+                    System.out.println(precio);
+                    System.out.println("aca termina el precio------------------------");
 
-                Datos.getInstance().crearOferta(producto, comercio, precio, info);
+                    Datos.getInstance().crearOferta(producto, comercio, precio, info);
 
-                intentLocal.putExtra("Resultado", producto.getNombre());
-                setResult(Activity.RESULT_OK,intentLocal);
-                finish();
+                    intentLocal.putExtra("Resultado", producto.getNombre());
+                    setResult(Activity.RESULT_OK,intentLocal);
+                    finish();
+                }
+
             }
         });
     }

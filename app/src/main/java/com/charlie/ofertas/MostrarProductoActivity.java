@@ -14,7 +14,8 @@ import android.widget.ListView;
 
 public class MostrarProductoActivity extends AppCompatActivity {
 
-    protected Producto datos;
+    protected Datos datos;
+    protected Producto prod;
     protected TextInputEditText producto, marca, contenido, rubro;
     protected ListView listaDeOfertas;
     protected AdaptadorOfertas adapte;
@@ -26,6 +27,8 @@ public class MostrarProductoActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        datos = Datos.getInstance();
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,20 +39,20 @@ public class MostrarProductoActivity extends AppCompatActivity {
         });
 
         String ID = getIntent().getStringExtra("Producto");
-        datos = Datos.getInstance().getProductoByID(ID);
+        prod = Datos.getInstance().getProductoByID(ID);
 
         producto = findViewById(R.id.mostrarNombreProducto);
         marca = findViewById(R.id.mostrarMarcaProducto);
         contenido = findViewById(R.id.mostrarContenidoProducto);
         rubro = findViewById(R.id.mostrarRubroProducto);
 
-        producto.setText(datos.getNombre());
-        marca.setText(datos.getMarca());
-        contenido.setText(datos.getCant()+ datos.getUnidad());
-        rubro.setText(datos.getRubro());
+        producto.setText(prod.getNombre());
+        marca.setText(prod.getMarca());
+        contenido.setText(prod.getCant()+ prod.getUnidad());
+        rubro.setText(prod.getRubro());
 
         listaDeOfertas = findViewById(R.id.listaOfertas);
-        adapte = new AdaptadorOfertas(this, datos.getOfertasDeEste());
+        adapte = new AdaptadorOfertas(this, datos.getOfertasDeProductoID(prod.getID()));
         listaDeOfertas.setAdapter(adapte);
         //aca podria agregar un oyente a cada item que dirija al comercio
 

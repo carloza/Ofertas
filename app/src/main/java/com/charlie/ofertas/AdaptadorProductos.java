@@ -16,11 +16,12 @@ public class AdaptadorProductos extends BaseAdapter {
     protected Context context;
     protected ArrayList<Producto> lista;
     protected LayoutInflater inflater = null;
+    protected Datos datos;
 
     public AdaptadorProductos(Context context, ArrayList<Producto> lista) {
         this.lista = lista;
         this.context = context;
-
+        datos = Datos.getInstance();
     }
 
     @Override
@@ -59,8 +60,8 @@ public class AdaptadorProductos extends BaseAdapter {
         //seteo atributos
         Rubro.setImageResource(R.mipmap.ic_launcher_round);
         Producto.setText(item.getNombre());
-        Oferta oferta = item.primerOferta();
-        String nombreComercio = (oferta==null? "no hay oferta" : oferta.getComercio().getNombre());
+        Oferta oferta = datos.getPrimerOfertaDeProductoID(item.getID());
+        String nombreComercio = (oferta==null? "no hay oferta" : datos.getComercioByID(oferta.getComercioID()).getNombre());
         Comercio.setText(nombreComercio);
         String precio = (oferta==null? "no hay oferta" : "$ "+oferta.getPrecio());
         Precio.setText(precio);

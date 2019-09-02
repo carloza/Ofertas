@@ -16,10 +16,12 @@ public class AdaptadorOfertas extends BaseAdapter {
     protected Context context;
     protected ArrayList<Oferta> lista;
     protected LayoutInflater inflater = null;
+    protected Datos datos;
 
     public AdaptadorOfertas(Context context, ArrayList<Oferta> lista) {
         this.context = context;
         this.lista = lista;
+        datos = Datos.getInstance();
     }
 
     @Override
@@ -56,7 +58,7 @@ public class AdaptadorOfertas extends BaseAdapter {
         //seteo atributos
         iRubro.setImageResource(R.mipmap.ic_launcher_round);
         Precio.setText("$ "+item.getPrecio());
-        Comercio comercio = item.getComercio();
+        Comercio comercio = datos.getComercioByID(item.getComercioID());
         Comercio.setText(comercio.getNombre());
         direccion.setText(comercio.getDireccion());
 

@@ -6,14 +6,15 @@ import java.util.ArrayList;
  * Esta clase es para representar cada Producto
  */
 public class Producto {
-    protected String ID;
-    protected String nombre;
-    protected String marca;
-    protected float cant;
-    protected String unidad;
-    protected String rubro;
-    protected long codigoBarra; //aca estaria piola implementar algo con la cam
-    protected ArrayList<Oferta> OfertasDeEste; //esto deberia guardarse ordenado, ya vere
+
+    private String ID;
+    private String nombre;
+    private String marca;
+    private float cant;
+    private String unidad;
+    private String rubro;
+    private long codigoBarra; //aca estaria piola implementar algo con la cam
+    //private ArrayList<Oferta> OfertasDeEste; //esto deberia guardarse ordenado, ya vere
 
     public Producto(String ID, String nombreArticulo, String marca, float cant, String unidad, String rubro, long codigoBarra) {
         this.ID = ID;
@@ -23,7 +24,7 @@ public class Producto {
         this.unidad = unidad;
         this.rubro = rubro;
         this.codigoBarra = codigoBarra;
-        this.OfertasDeEste = new ArrayList<Oferta>();
+        //this.OfertasDeEste = new ArrayList<Oferta>();
 
     }
 
@@ -55,6 +56,7 @@ public class Producto {
         return ID;
     }
 
+    /*
     public boolean addOferta(Oferta o){
         try {
             OfertasDeEste.add(o);
@@ -72,20 +74,21 @@ public class Producto {
         return OfertasDeEste.get(0);
     }
 
-    /**
+
      * Elimina la Oferta ingresada por parametro
      * @param o
      * @return
-     */
+     *
+
     public boolean eliminarOferta(Oferta o){
         return OfertasDeEste.remove(o);
     }
 
-    /**
+
      * elimina la oferta con el Id ingresado por parametro
      * @param ID
      * @return
-     */
+
     public boolean eliminarOferta(String ID){
         for (Oferta aux: OfertasDeEste) {
             if (aux.getID().equals(ID)){
@@ -95,5 +98,5 @@ public class Producto {
         }
         return false;
     }
-
+    */
 }

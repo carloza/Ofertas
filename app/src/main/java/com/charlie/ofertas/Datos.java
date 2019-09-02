@@ -1,20 +1,40 @@
 package com.charlie.ofertas;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Datos {
 
+    protected FirebaseDatabase database;
+    protected DatabaseReference myRef;
     protected ArrayList<Comercio> listaComercios;
     protected ArrayList<Producto> listaProductos;
     protected ArrayList<Oferta> listaOfertas;
     protected static Datos misDatos;
 
     private Datos() {
-
-        listaOfertas = new ArrayList<Oferta>();
-        listaProductos = new ArrayList<Producto>();
-        listaComercios = new ArrayList<Comercio>();
+        //FirebaseApp.initializeApp(this);
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
         creaDatos();
+        mandarDB();
+    }
+
+    private void mandarDB() {
+        for (Comercio c: listaComercios) {
+            myRef.child("Comercios").child(c.getID()).setValue(c);
+        }
+
+        for (Producto p: listaProductos) {
+            myRef.child("Produtos").child(p.getID()).setValue(p);
+        }
+
+        for (Oferta o: listaOfertas) {
+            myRef.child("Ofertas").child(o.getID()).setValue(o);
+        }
     }
 
     public static Datos getInstance(){
@@ -29,33 +49,39 @@ public class Datos {
      * va a volar cuando tenga firebase andando
      */
     private void creaDatos() {
+
+        listaOfertas = new ArrayList<Oferta>();
+        listaProductos = new ArrayList<Producto>();
+        listaComercios = new ArrayList<Comercio>();
+
+
         Comercio c1, c2, c3, c4, c5;
         c1 = new Comercio(
-                "0",
+                UUID.randomUUID().toString(),
                 "La Pepa",
                 "Chacabuco y Belgrano",
                 "Punta Alta",
                 "esta en la esquina en frente del locutorio");
         c2 = new Comercio(
-                "1",
+                UUID.randomUUID().toString(),
                 "Estela y Fabian",
                 "Luiggi 630",
                 "punta alta",
                 "Frente al jardin");
         c3 = new Comercio(
-                "2",
+                UUID.randomUUID().toString(),
                 "Cooperativa Obrera",
                 "Brown 128",
                 "punta alta",
                 "tiene mas de un comercio eca en punta");
         c4 = new Comercio(
-                "5",
+                UUID.randomUUID().toString(),
                 "Supermercado Corazon",
                 "Saavedra 146",
                 "punta alta",
                 "super chino");
         c5 = new Comercio(
-                "6",
+                UUID.randomUUID().toString(),
                 "La tauriña",
                 "saavedra 55",
                 "punta alta",
@@ -68,7 +94,7 @@ public class Datos {
 
         Producto p1, p2, p3, p4, p5, p6;
         p1 = new Producto(
-                "0",
+                UUID.randomUUID().toString(),
                 "Fernet",
                 "branca",
                 750,
@@ -76,7 +102,7 @@ public class Datos {
                 "Bebida",
                 0);
         p2 = new Producto(
-                "1",
+                UUID.randomUUID().toString(),
                 "Pan",
                 "",
                 1,
@@ -84,7 +110,7 @@ public class Datos {
                 "Panificados",
                 0);
         p3 = new Producto(
-                "2",
+                UUID.randomUUID().toString(),
                 "Asado",
                 "",
                 1,
@@ -92,7 +118,7 @@ public class Datos {
                 "Carniceria",
                 0);
         p4 = new Producto(
-                "3",
+                UUID.randomUUID().toString(),
                 "Arroz",
                 "3 Gallos",
                 500,
@@ -100,7 +126,7 @@ public class Datos {
                 "Almacen",
                 518029);
         p5 = new Producto(
-                "4",
+                UUID.randomUUID().toString(),
                 "Gaseosa Cola",
                 "Coca-Cola",
                 2.25f,
@@ -108,7 +134,7 @@ public class Datos {
                 "Bebida",
                 0);
         p6 = new Producto(
-                "5",
+                UUID.randomUUID().toString(),
                 "Fideos Spagetti",
                 "Primer Precio",
                 300,
@@ -124,47 +150,47 @@ public class Datos {
 
         Oferta o1, o2, o3, o4, o5, o6;
         o1 = new Oferta(
-                "0",
-                p1,
+                UUID.randomUUID().toString(),
+                p1.getID(),
                 205.5f,
-                c4,
+                c4.getID(),
                 null);
-        p1.addOferta(o1);
+        //p1.addOferta(o1);
         o2 = new Oferta(
-                "1",
-                p2,
+                UUID.randomUUID().toString(),
+                p2.getID(),
                 29,
-                c5,
+                c5.getID(),
                 "hay que ir temprano");
-        p2.addOferta(o2);
+        //p2.addOferta(o2);
         o3 = new Oferta(
-                "2",
-                p3,
+                UUID.randomUUID().toString(),
+                p3.getID(),
                 290,
-                c3,
+                c3.getID(),
                 null);
-        p3.addOferta(o3);
+        //p3.addOferta(o3);
         o4 = new Oferta(
-                "3",
-                p4,
+                UUID.randomUUID().toString(),
+                p4.getID(),
                 79.9f,
-                c1,
+                c1.getID(),
                 "A veces el asado sale medio duro");
-        p4.addOferta(o4);
+        //p4.addOferta(o4);
         o5 = new Oferta(
-                "4",
-                p5,
+                UUID.randomUUID().toString(),
+                p5.getID(),
                 205.5f,
-                c2,
+                c2.getID(),
                 null);
-        p5.addOferta(o5);
+        //p5.addOferta(o5);
         o6 = new Oferta(
-                "5",
-                p6,
+                UUID.randomUUID().toString(),
+                p6.getID(),
                 11.5f,
-                c2,
+                c2.getID(),
                 null);
-        p6.addOferta(o6);
+        //p6.addOferta(o6);
 
         listaOfertas.add(o1);
         listaOfertas.add(o2);
@@ -195,9 +221,29 @@ public class Datos {
         return null;
     }
 
+    public ArrayList<Oferta> getOfertasDeProductoID(String ID){
+        ArrayList<Oferta> salida = new ArrayList<>();
+        for (Oferta o: listaOfertas) {
+            if (o.getProductoID().equals(ID)) salida.add(o);
+        }
+        return salida;
+    }
+
+    public Oferta getPrimerOfertaDeProductoID(String ID){
+        for (Oferta o: listaOfertas) {
+            if (o.getProductoID().equals(ID)) return o;
+        }
+        return null;
+    }
+
     public Oferta crearOferta(Producto producto, Comercio comercio, float precio, String info){
-        Oferta salida = new Oferta(listaOfertas.size()+"",producto, precio, comercio, info);
-        producto.addOferta(salida);
+        Oferta salida = new Oferta(
+                UUID.randomUUID().toString(),
+                producto.getID(),
+                precio,
+                comercio.getID(),
+                info);
+        //producto.addOferta(salida);
 
         return salida;
     }

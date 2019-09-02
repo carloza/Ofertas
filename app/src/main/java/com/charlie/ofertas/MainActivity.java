@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-//import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -123,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.buscarOferta) {
+            Toast.makeText(MainActivity.this, "Todavia en desarrollo", Toast.LENGTH_SHORT).show();
             return true;
         }
         if (id == R.id.about) {
@@ -210,10 +210,11 @@ public class MainActivity extends AppCompatActivity {
         if(DEBUG)Toast.makeText(getBaseContext(), "Entre al onActivityResult", Toast.LENGTH_LONG).show();
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                //String returnedResult = data.getStringExtra("Extito");
+                //String returnedResult = data.getStringExtra("key");
                 // OR
                 // String returnedResult = data.getDataString();
-                Toast.makeText(getBaseContext(), data.getStringExtra("Resultado"), Toast.LENGTH_LONG).show();
+                String result = data.getStringExtra("Resultado");
+                Toast.makeText(getBaseContext(), "Guardaremos tu oferta de "+result, Toast.LENGTH_LONG).show();
             }
             else if(resultCode == RESULT_CANCELED){
                 Toast.makeText(getBaseContext(), data.getStringExtra("Resultado"), Toast.LENGTH_LONG).show();
@@ -271,5 +272,31 @@ public class MainActivity extends AppCompatActivity {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+
+        --------------------------------------------------------------------------------------------
+                        ESTO ES LO QUE REALMENTE ANDUVO DE FIREBASE
+        --------------------------------------------------------------------------------------------
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Ya estoy grabando en la BD wacheeeeen");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d(TAG, "Value is: " + value);
+                Toast.makeText(getBaseContext(), value, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
          */
 }
