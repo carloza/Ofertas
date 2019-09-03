@@ -11,6 +11,11 @@ public class Oferta {
     private String descripcion;
     private String fechaCreacion;
 
+    public Oferta(){
+
+    }
+
+    /*
     public Oferta(String ID, String productoID, float precio, String comercioID, String descripcion) {
         this.ID = ID;
         this.productoID = productoID;
@@ -19,6 +24,7 @@ public class Oferta {
         this.descripcion = (descripcion != null ? descripcion : "");
         this.fechaCreacion = (new Date()).toString();
     }
+    */
 
     public String getID() {
         return ID;

@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected final String TAG = "firestore";
     protected final static boolean DEBUG = false;
     protected int request_Code;
+    protected Datos datos;
 
 
     /**
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        datos = Datos.getInstance();
 
         //creacion de la actividad
         super.onCreate(savedInstanceState);
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         // boton flotante
         botonFltante();
 
-        //list view de productos ( podria tirarlo dentro de un metodo tambien :P )
+        //list view de productos (todavia estoy descubriendo xq no funciona)
         crearListaDeProductos();
 
     }
@@ -88,9 +91,10 @@ public class MainActivity extends AppCompatActivity {
         Bienvenida.setTitle("Importante");
         Bienvenida.setMessage("Esta app actualmente se encuentra en desarrollo");
         Bienvenida.setCancelable(false);
-        Bienvenida.setPositiveButton("Mandale mechaaa!!", new DialogInterface.OnClickListener() {
+        Bienvenida.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
                 Toast.makeText(MainActivity.this,"Bienvenido", Toast.LENGTH_SHORT).show();
+                crearListaDeProductos();
             }
         });
         Bienvenida.show();
@@ -142,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
      */
     protected ArrayList<Producto> GetLista(){
         //ArrayList<Oferta> lsi = new ArrayList<>();
-        Datos d = Datos.getInstance();
+        //Datos d = Datos.getInstance();
         /*
         for(int i = 0; i<15; i++){
             lsi.add(new Ofertas(i, "Oferta"+i, "Aca va el contenido: contenido "+i));
@@ -150,8 +154,10 @@ public class MainActivity extends AppCompatActivity {
         return lsi;
          */
 
-
-        return d.getListaProductos();
+        ArrayList<Producto> salida = datos.getListaProductos();
+        String mensaje = salida == null? "la lista todavia es nula": "la lista está instanciada";
+        System.out.println(salida);
+        return salida;
     }
 
     /**
@@ -220,9 +226,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), data.getStringExtra("Resultado"), Toast.LENGTH_LONG).show();
 
             }
-        }else if(requestCode == 2){
-
         }
+        //else if(requestCode == 2){ }
+        crearListaDeProductos();
     }
 
     /*

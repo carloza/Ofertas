@@ -8,6 +8,11 @@ public class Comercio {
     private String direccion;  //estos dos (localidad y direccion) estaria bueno
     private String localidad;  //si se puediera usar algun servio de google.maps
 
+    public Comercio(){
+
+    }
+
+    /*
     public Comercio(String ID, String nombre, String direccion, String localidad, String info) {
         this.ID = ID;
         this.nombre = nombre;
@@ -15,6 +20,7 @@ public class Comercio {
         this.localidad = localidad;
         this.info = info;
     }
+    */
 
     public String getID() {
         return ID;

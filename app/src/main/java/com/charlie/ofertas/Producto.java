@@ -16,6 +16,11 @@ public class Producto {
     private long codigoBarra; //aca estaria piola implementar algo con la cam
     //private ArrayList<Oferta> OfertasDeEste; //esto deberia guardarse ordenado, ya vere
 
+    public Producto(){
+
+    }
+
+    /*
     public Producto(String ID, String nombreArticulo, String marca, float cant, String unidad, String rubro, long codigoBarra) {
         this.ID = ID;
         this.nombre = nombreArticulo;
@@ -24,9 +29,8 @@ public class Producto {
         this.unidad = unidad;
         this.rubro = rubro;
         this.codigoBarra = codigoBarra;
-        //this.OfertasDeEste = new ArrayList<Oferta>();
-
     }
+    */
 
     public String getNombre() {
         return nombre;
@@ -56,47 +60,31 @@ public class Producto {
         return ID;
     }
 
-    /*
-    public boolean addOferta(Oferta o){
-        try {
-            OfertasDeEste.add(o);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
-    public ArrayList<Oferta> getOfertasDeEste() {
-        return OfertasDeEste;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Oferta primerOferta(){
-        return OfertasDeEste.get(0);
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
-
-     * Elimina la Oferta ingresada por parametro
-     * @param o
-     * @return
-     *
-
-    public boolean eliminarOferta(Oferta o){
-        return OfertasDeEste.remove(o);
+    public void setCant(float cant) {
+        this.cant = cant;
     }
 
-
-     * elimina la oferta con el Id ingresado por parametro
-     * @param ID
-     * @return
-
-    public boolean eliminarOferta(String ID){
-        for (Oferta aux: OfertasDeEste) {
-            if (aux.getID().equals(ID)){
-                OfertasDeEste.remove(aux);
-                return true;
-            }
-        }
-        return false;
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
     }
-    */
+
+    public void setRubro(String rubro) {
+        this.rubro = rubro;
+    }
+
+    public void setCodigoBarra(long codigoBarra) {
+        this.codigoBarra = codigoBarra;
+    }
 }

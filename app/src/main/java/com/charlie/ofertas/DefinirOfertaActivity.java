@@ -46,15 +46,15 @@ public class DefinirOfertaActivity extends AppCompatActivity {
                     textPrecio.setError("Dato requerido");
                 }else{
                     //aca no atrapo la posible excepcion xq la vista controla que solo inresen numeros
-                    int precio = Integer.parseInt(textPrecio.getText().toString());
-                    float precio2 = Float.parseFloat(textPrecio.getText().toString());
+                    //int precio = Integer.parseInt(textPrecio.getText().toString());
+                    float precio = Float.parseFloat(textPrecio.getText().toString());
                     String info = textInfo.getText().toString();
 
                     System.out.println("el precio es --------------------------------");
                     System.out.println(precio);
                     System.out.println("aca termina el precio------------------------");
 
-                    Datos.getInstance().crearOferta(producto, comercio, precio, info);
+                    Datos.getInstance().crearOferta(producto.getID(), comercio.getID(), precio, info);
 
                     intentLocal.putExtra("Resultado", producto.getNombre());
                     setResult(Activity.RESULT_OK,intentLocal);
