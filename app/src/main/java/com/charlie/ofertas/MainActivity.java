@@ -56,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
         botonFltante();
 
         //list view de productos (todavia estoy descubriendo xq no funciona)
+        //tarda un poco la conexion a la base de datos, veré como agregar un delay
+        //delay casero
+        /*
+        long sleep = System.currentTimeMillis();
+        while (true){
+            if(sleep+2000 < System.currentTimeMillis()){
+                break;
+            }
+        }*/
         crearListaDeProductos();
 
     }
@@ -76,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
                 Producto a = adaptadorProductos.getItem(position);
                 //Toast.makeText(MainActivity.this, ""+ a.getNombre(), Toast.LENGTH_SHORT).show();
                 Intent nuevoIntent = new Intent(MainActivity.this, MostrarProductoActivity.class);
-                nuevoIntent.putExtra("Producto", a.getID());
-                startActivity(nuevoIntent);
+                nuevoIntent.putExtra("ProductoID", a.getID());
+                startActivityForResult(nuevoIntent, 1);
             }
         });
     }
@@ -188,12 +197,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //creamos el intent                                    BuscarProductosActivity.class
                 Intent i = new Intent(MainActivity.this , BuscarProductosActivity.class);
-                //                                                     CargarNuevoActivity.class
-
-                i.putExtra("Main", "Manito");
 
                 //iniciamos la nueva actividad; aca me voy a la actividad de Cargar una nueva Oferta
                 request_Code = 1;
@@ -227,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-        //else if(requestCode == 2){ }
+        //else if(requestCode == 2){  }
         crearListaDeProductos();
     }
 

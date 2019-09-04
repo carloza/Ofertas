@@ -47,7 +47,8 @@ public class Datos {
     }
 
     private void actualiza() {
-        //crearListas();
+        //las listas las limpio dentro de cada ValueEvent ya que si las limpio
+        //a esta altura las listas quedan con datos duplicados
 
         myRef.child("Comercios").addValueEventListener(new ValueEventListener() {
             @Override
@@ -155,6 +156,32 @@ public class Datos {
         salida.setFechaCreacion(new Date().toString());
         //producto.addOferta(salida);
         myRef.child("Ofertas").child(salida.getID()).setValue(salida);
+        actualiza();
+        return salida;
+    }
+
+    public Producto crearProducto(String nombre, String marca, float cant, String unidad, String rubro){
+        Producto salida = new Producto();
+        salida.setID(UUID.randomUUID().toString());
+        salida.setNombre(nombre);
+        salida.setMarca(marca);
+        salida.setCant(cant);
+        salida.setUnidad(unidad);
+        salida.setRubro(rubro);
+        salida.setCodigoBarra(0);
+        myRef.child("Produtos").child(salida.getID()).setValue(salida);
+        actualiza();
+        return salida;
+    }
+
+    public Comercio crearComercio(String nombre, String info, String direccion, String localidad){
+        Comercio salida = new Comercio();
+        salida.setID(UUID.randomUUID().toString());
+        salida.setNombre(nombre);
+        salida.setInfo(info);
+        salida.setDireccion(direccion);
+        salida.setLocalidad(localidad);
+        myRef.child("Comercios").child(salida.getID()).setValue(salida);
         actualiza();
         return salida;
     }

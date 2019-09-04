@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 public class BuscarProductosActivity extends AppCompatActivity {
@@ -56,12 +57,14 @@ public class BuscarProductosActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String IDProd = adapte.getItem(position).getID();
                 Intent i = new Intent(getBaseContext(), BuscarComerciosActivity.class);
-                i.putExtras(intentLocal.getExtras());
-                i.putExtra("IDProducto", IDProd);
+                //i.putExtras(intentLocal.getExtras());
+                i.putExtra("ProductoID", IDProd);
                 i.putExtra("Tutorial", tutorial);
                 startActivityForResult(i,1);
             }
         });
+
+        botonFltante();
 
     }
 
@@ -88,7 +91,7 @@ public class BuscarProductosActivity extends AppCompatActivity {
 
     private void mostrarAyuda() {
         AlertDialog.Builder Mensaje = new AlertDialog.Builder(this);
-        Mensaje.setMessage("En el cuadro de texto podras escribir una pablabra cable para filtrar y " +
+        Mensaje.setMessage("En el cuadro de texto superior podras escribir una pablabra cable para filtrar y " +
                 "en la lista de abajo podras elegir el producto que buscas, si no lo encotras mas abajo" +
                 " se encuentra el boton rojo para agregar tu producto");
         Mensaje.setCancelable(false);
@@ -97,6 +100,23 @@ public class BuscarProductosActivity extends AppCompatActivity {
             }
         });
         Mensaje.show();
+    }
+
+    protected void botonFltante(){
+        FloatingActionButton fab = findViewById(R.id.botonFlotanteProductos);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //creamos el intent
+                Intent i = new Intent(BuscarProductosActivity.this , CrearProductoActivity.class);
+
+                //i.putExtras(intentLocal.getExtras());
+
+                //iniciamos la nueva actividad; aca me voy a la actividad de Cargar una nueva Oferta
+                startActivityForResult(i,1);
+                //startActivity(i);
+            }
+        });
     }
 
     public void onBackPressed() {

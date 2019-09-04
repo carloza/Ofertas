@@ -1,9 +1,11 @@
 package com.charlie.ofertas;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.math.MathUtils;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,8 +29,13 @@ public class DefinirOfertaActivity extends AppCompatActivity {
         intentLocal = getIntent();
         datos = Datos.getInstance();
 
-        final Producto producto = datos.getProductoByID(intentLocal.getStringExtra("IDProducto"));
-        final Comercio comercio = datos.getComercioByID(intentLocal.getStringExtra("IDComercio"));
+        boolean tutorial = intentLocal.getBooleanExtra("Tutorial",true);
+        if(tutorial){
+            mostrarAyuda();
+        }
+
+        final Producto producto = datos.getProductoByID(intentLocal.getStringExtra("ProductoID"));
+        final Comercio comercio = datos.getComercioByID(intentLocal.getStringExtra("ComercioID"));
 
         textProducto = findViewById(R.id.productoEnOferta);
         textComercio = findViewById(R.id.comercioEnOferta);
@@ -50,10 +57,6 @@ public class DefinirOfertaActivity extends AppCompatActivity {
                     float precio = Float.parseFloat(textPrecio.getText().toString());
                     String info = textInfo.getText().toString();
 
-                    System.out.println("el precio es --------------------------------");
-                    System.out.println(precio);
-                    System.out.println("aca termina el precio------------------------");
-
                     Datos.getInstance().crearOferta(producto.getID(), comercio.getID(), precio, info);
 
                     intentLocal.putExtra("Resultado", producto.getNombre());
@@ -63,6 +66,19 @@ public class DefinirOfertaActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void mostrarAyuda() {
+        AlertDialog.Builder Mensaje = new AlertDialog.Builder(this);
+        Mensaje.setMessage("Ya has seleccionado el producto y el comercio para definir tu oferta," +
+                " solo resta establecer el precio del producto en ese comercio, opcional podras " +
+                "dejar una pequeña info para quien vea esta oferta (Ej: Quedaba poca mercaderia)");
+        Mensaje.setCancelable(false);
+        Mensaje.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+            }
+        });
+        Mensaje.show();
     }
 
 

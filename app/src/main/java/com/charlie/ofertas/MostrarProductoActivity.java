@@ -1,5 +1,6 @@
 package com.charlie.ofertas;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,16 +32,7 @@ public class MostrarProductoActivity extends AppCompatActivity {
 
         datos = Datos.getInstance();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        String ID = getIntent().getStringExtra("Producto");
+        String ID = getIntent().getStringExtra("ProductoID");
         prod = Datos.getInstance().getProductoByID(ID);
 
         producto = findViewById(R.id.mostrarNombreProducto);
@@ -56,7 +49,47 @@ public class MostrarProductoActivity extends AppCompatActivity {
         adapte = new AdaptadorOfertas(this, datos.getOfertasDeProductoID(prod.getID()));
         listaDeOfertas.setAdapter(adapte);
         //aca podria agregar un oyente a cada item que dirija al comercio
+        //lo que voy a hacer es mostrar la info de cada oferta
+        listaDeOfertas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Oferta o = adapte.getItem(position);
+                String info = o.getDescripcion().equals("") ? "No hay info para esta oferta": o.getDescripcion();
+                String mensaje = "info:\n" +
+                        info +
+                        "\n \n"+
+                        "Fecha de Oferta:\n"+
+                        o.getFechaCreacion();
+                Toast.makeText(MostrarProductoActivity.this, mensaje, Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getBaseContext(), BuscarComerciosActivity.class);
+                i.putExtras(getIntent().getExtras());
+                i.putExtra("Tutorial", false);
+                startActivityForResult(i,1);
+            }
+        });
+
+    }
+
+    public void onBackPressed() {
+        getIntent().putExtra("Resultado", "Cancel: Oferta Descartada");
+        setResult(5,getIntent());
+        finish();
+        //super.onBackPressed();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            getIntent().putExtras(data.getExtras());
+            setResult(resultCode,getIntent());
+            finish();
+        }
     }
 
 }
